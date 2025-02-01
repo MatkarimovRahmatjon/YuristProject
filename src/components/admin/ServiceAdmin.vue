@@ -1,4 +1,5 @@
 <template>
+
   <div v-if="togle" class="fixed z-50 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
     <div class="absolute bg-black flex flex-col opacity-[90%] items-center justify-center p-10 px-16 rounded-[15px]">
       <div class="file-upload-container">
@@ -57,13 +58,14 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script setup>
-import Navbar from "../header.vue";
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { URL } from "../../auth/url";
+import Aside from "@/components/aside.vue";
 
 const ServiceId = ref(null);
 const ServiceData = ref([]);

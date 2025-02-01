@@ -31,7 +31,6 @@
         </div>
       </div>
     </div>
-    <!-- <Navbar /> -->
     <div class="asd h-[410px] flex justify-center items-center  ">
       <h1 class="text-[40px] -mt-16">Ommaviy oferta</h1>
     </div>
@@ -60,7 +59,6 @@
 </template>
 
 <script setup>
-import Navbar from "../main.vue";
 import { ref } from "vue";
 import { URL } from "../../auth/url";
 import axios from "axios";

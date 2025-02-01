@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <div class="flex flex-col items-center py-10">
     <div class="flex flex-col items-center mt-6 px-4">
       <h1 class="text-2xl sm:text-4xl font-bold text-center text-blue-800 mb-6">
@@ -26,7 +25,6 @@
 <script setup>
 import { ref } from "vue";
 import { URL } from "../../auth/url.js";
-import Navbar from "@/components/header.vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
 const data = ref([]);

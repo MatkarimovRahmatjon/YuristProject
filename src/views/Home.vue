@@ -5,7 +5,6 @@
             Login
         </button>
     </div>
-    <Navbar />
     <Time />
     <Header />
     <Appeal />
@@ -15,7 +14,6 @@
 
 <script setup>
 import Appeal from "@/components/appeal/appeal.vue";
-import Navbar from "@/components/header.vue";
 import HomeAction from "@/components/main/HomeAction.vue";
 import Header from "@/components/main/main.vue";
 import Card from "@/components/sponsor/card.vue";

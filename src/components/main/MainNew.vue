@@ -1,9 +1,12 @@
 <script setup>
 
+import Admin from "@/components/main/admin.vue";
 </script>
 
 <template>
-  $END$
+<Admin/>
+  <RouterView />
+
 </template>
 
 <style scoped>

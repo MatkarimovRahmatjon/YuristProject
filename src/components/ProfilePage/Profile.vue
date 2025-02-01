@@ -1,7 +1,9 @@
 <script setup>
 import {ref, onMounted} from 'vue'
-import { useRoute } from "vue-router";
+import {useRoute} from "vue-router";
 import axios from 'axios'
+import {URL} from "@/auth/url.js";
+
 const userInfo = ref(null)
 const loading = ref(true)
 const error = ref(null)
@@ -12,8 +14,8 @@ const fetchUserData = async () => {
   try {
     const token = localStorage.getItem("token");
     loading.value = true
-    const response = await axios.get(`http://45.146.166.100:3000/admin/${id.value}`,{
-      headers: { Authorization: `Bearer ${token}` },
+    const response = await axios.get(`http://45.146.166.100:3000/admin/${id.value}`, {
+      headers: {Authorization: `Bearer ${token}`},
     })
     userInfo.value = response.data
   } catch (err) {
@@ -23,10 +25,13 @@ const fetchUserData = async () => {
     loading.value = false
   }
 }
-
+const getImageUrl = (img) => {
+  return img ? `${URL}/upload/${img}` : "/default-avatar.png";
+};
 onMounted(() => {
   fetchUserData()
 })
+console.log(userInfo)
 </script>
 
 <template>
@@ -49,10 +54,7 @@ onMounted(() => {
         <!-- Profile Image -->
         <div class="w-48 h-48 border-2 border-profile-blue rounded-lg overflow-hidden">
           <img
-              :src="userInfo.image || '/profile-image.jpg'"
-              alt="Profile"
-              class="w-full h-full object-cover"
-          >
+              :src="getImageUrl(userInfo.img)"/>
         </div>
 
         <!-- Status Section -->
@@ -80,13 +82,13 @@ onMounted(() => {
         <div v-for="(value, key) in {
           'Ism va familya': userInfo.name,
           'Passport raqami': userInfo.passportNumber,
-          'Fuqaroning JSHSHIR raqami': userInfo.jshshir,
-          'Fuqaroning logini': userInfo.login,
+          'Fuqaroning JSHSHIR raqami': userInfo.usercode,
+          'Fuqaroning logini': userInfo.username,
           'Fuqaroning mobil telefon raqami': userInfo.phone
         }" :key="key"
-             class="flex p-3 hover:bg-white hover:text-black text-white border border-profile-blue rounded-md">
-          <span class="min-w-[200px] font-medium text-profile-blue">{{ key }} :</span>
-          <span class="flex-1  ">{{ value }}</span>
+             class="flex p-3 hover:bg-white group duration-500 border  rounded-md">
+          <span class=" group-hover:text-black min-w-[200px] font-medium duration-500">{{ key }} :</span>
+          <span class="flex-1 group-hover:text-black duration-500 ">{{ value }}</span>
         </div>
       </div>
     </div>

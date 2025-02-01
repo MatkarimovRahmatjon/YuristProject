@@ -5,7 +5,6 @@
             Adminlar ro'yxati
         </button>
     </div>
-    <Header />
     <Time />
     <!-- <HomeAction /> -->
     <Main />

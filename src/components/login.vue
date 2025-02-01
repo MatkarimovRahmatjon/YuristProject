@@ -87,10 +87,10 @@ const setData = async () => {
       username: username.value.trim(),
       password: password.value.trim(),
     });
-   id.value = res.data.data.data.user.id
+   id.value = res.data.data.user.id
     if (res.data.statusCode === 200) {
-      const token = res.data.data.data.token;
-      const role = res.data.data.data.user.role;
+      const token = res.data.data.token;
+      const role = res.data.data.user.role;
       const expirationTime = new Date().getTime() + 3600000;
       localStorage.setItem("token", token);
       localStorage.setItem("tokenExpiration", expirationTime.toString());

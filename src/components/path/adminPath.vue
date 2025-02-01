@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <!-- Add Modal -->
   <div v-if="showModal"
     class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
@@ -93,7 +92,6 @@ import { useRouter } from "vue-router";
 import uploadpathadmin from "@/components/path/uploadpathadmin.vue";
 import { URL } from "../../auth/url";
 import axios from "axios";
-import Navbar from "@/components/header.vue";
 
 const PutId = ref(null);
 const router = useRouter();

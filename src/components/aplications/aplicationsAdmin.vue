@@ -1,6 +1,9 @@
 <template>
+<div class="flex items-center justify-between">
+  <Aside />
+  <div>
 
-  <Navbar />
+
 
   <div v-if="showModal"
     class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
@@ -75,8 +78,8 @@
     </div>
   </div>
 
-  <div class="flex flex-col items-center py-10">
-    <div class="w-full flex justify-end px-6">
+  <div class="flex flex-col w-[130%] items-center py-10">
+    <div class="w-full flex justify-end p-6">
       <button @click="toggleModal" class="text-lg font-medium py-2 px-4 bg-lime-500 hover:bg-lime-600 rounded-lg">
         Add +
       </button>
@@ -85,7 +88,7 @@
       <h1 class="text-2xl sm:text-4xl font-bold text-center text-blue-800 mb-6">
         O'zbekiston Respublikasi hududida sud tizimiga murojaat qilish tartibi
       </h1>
-      <div class="w-full  bg-gray-200 rounded-lg p-6 sm:p-10">
+      <div class="w-full bg-gray-200 rounded-lg p-6 sm:p-10">
         <h2 class="text-xl sm:text-2xl font-semibold text-blue-800 text-center mb-6">
           Siz o'zingizga kerak bo'lgan sudni tanlang!
         </h2>
@@ -104,15 +107,17 @@
       </div>
     </div>
   </div>
+  </div>
+</div>
 </template>
 <script setup>
 import { watch } from "vue";
 import { ref } from "vue";
 import { URL } from "../../auth/url.js";
 import axios from "axios";
-import Navbar from "@/components/header.vue";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
+import Aside from "@/components/aside.vue";
 const PutId = ref(null);
 const PutModal = ref(false);
 const data = ref([]);
