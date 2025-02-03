@@ -1,4 +1,5 @@
 <template>
+  <ParticlesHeader />
   <div class="flex flex-col items-center py-10">
     <div class="flex flex-col items-center mt-6 px-4">
       <h1 class="text-2xl sm:text-4xl font-bold text-center text-blue-800 mb-6">
@@ -27,6 +28,7 @@ import { ref } from "vue";
 import { URL } from "../../auth/url.js";
 import { useRoute } from "vue-router";
 import { useRouter } from "vue-router";
+import ParticlesHeader from "@/components/header.vue";
 const data = ref([]);
 const Id = ref(null);
 const imageBaseUrl = `${URL}/upload`;

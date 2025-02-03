@@ -8,8 +8,11 @@ const userInfo = ref(null)
 const loading = ref(true)
 const error = ref(null)
 const route = useRoute()
+const qwe = true
+const partners = null
+const offering = null
+const courts = null
 const id = ref(route.params.id)
-console.log(id.value)
 const fetchUserData = async () => {
   try {
     const token = localStorage.getItem("token");
@@ -18,6 +21,7 @@ const fetchUserData = async () => {
       headers: {Authorization: `Bearer ${token}`},
     })
     userInfo.value = response.data
+    console.log(userInfo.value)
   } catch (err) {
     error.value = 'Failed to load user data'
     console.error('Error fetching user data:', err)
@@ -35,6 +39,20 @@ console.log(userInfo)
 </script>
 
 <template>
+
+  <div v-if="qwe" class="fixed z-10 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-lg">
+      <h1 class="text-black text-[20px]">courts</h1>
+      <h1 class="text-black text-[20px]">offering</h1>
+      <h1 class="text-black text-[20px]">partners</h1>
+      <p class="text-red-600 text-sm">{{ err }}</p>
+      <button @click="post"
+              class="bg-green-600 text-white px-4 py-2 rounded-lg mt-3 w-full\ hover:bg-green-800 transition">
+        ✅ Yuborish
+      </button>
+    </div>
+  </div>
+
   <div class="max-w-4xl mx-auto p-6">
     <!-- Loading State -->
     <div v-if="loading" class="text-center py-8">
@@ -92,5 +110,6 @@ console.log(userInfo)
         </div>
       </div>
     </div>
+
   </div>
 </template>

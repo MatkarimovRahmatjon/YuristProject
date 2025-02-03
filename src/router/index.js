@@ -34,6 +34,7 @@ const routes = [
 
     {
         path: '/login',
+        name: "login",
         component: () => import('@/components/login.vue'),
     },
     {
@@ -41,7 +42,7 @@ const routes = [
         component: () => import('@/components/Templates/AdminTemplate.vue'),
         children: [
             {path: '', component: () => import('@/components/main/admin.vue')},
-            {path: '/appeals', component: () => import('@/components/appeal/appealAdmin.vue')},
+            {path: '/appeal', component: () => import('@/components/appeal/appealAdmin.vue')},
             {path: '/partners', component: () => import('@/components/sponsor/CardAdmin.vue')},
             {path: '/admins', component: () => import('@/components/BigAdminCreate.vue')},
             {path: '/yurists', component: () => import('@/components/BigAdminCreate.vue')},

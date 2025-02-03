@@ -98,7 +98,6 @@
               class="relative bg-white border-4 hover:bg-lime-500 duration-500 border-blue-800 rounded-lg p-6">
               <img @click.stop="func(item.id)" class="absolute top-2 right-2 w-6 h-6 cursor-pointer"
                 src="../../../public/ellipsis.png" alt="Options" />
-
               <div class="flex items-center gap-4">
                 <img v-if="item.img" :src="getImageUrl(item.img)" alt="Image" class="w-14 h-14 rounded-md" />
                 <h3 class="text-lg font-medium text-center text-black">{{ item.name }}</h3>

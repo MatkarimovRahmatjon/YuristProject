@@ -80,7 +80,6 @@ const router = useRouter();
 const url = `${URL}/login`;
 const id = ref(null)
 
-
 const setData = async () => {
   try {
     const res = await axios.post(url, {
@@ -88,6 +87,8 @@ const setData = async () => {
       password: password.value.trim(),
     });
    id.value = res.data.data.user.id
+localStorage.setItem("id", res.data.data.user.id)
+console.log(id.value)
     if (res.data.statusCode === 200) {
       const token = res.data.data.token;
       const role = res.data.data.user.role;
@@ -101,7 +102,7 @@ const setData = async () => {
       } else if (role.trim() === "admin") {
         router.push(`/admin/${id.value}`);
       } else if (role.trim() === "bigAdmin") {
-        router.push("/bigadmin");
+        router.push(`/admin`);
       } else {
         error.value = "Bu rolda tizimga kirish taqiqlangan.";
       }

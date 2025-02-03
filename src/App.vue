@@ -1,7 +1,7 @@
 <template>
 
-  <div id="app" class="relative top-0">
-    <div class="flex justify-end">
+  <div id="app" class="top-0">
+    <div class="flex z-50 relative top-0 justify-end">
       <select v-model="dat" @change="changeLanguage"
               class="bg-blue-700 mx-1 my-2 hover:bg-blue-800 rounded-lg outline-none px-4 py-2">
         <option value="datalotin">uzb</option>

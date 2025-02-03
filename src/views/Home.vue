@@ -5,6 +5,7 @@
             Login
         </button>
     </div>
+    <ParticlesHeader />
     <Time />
     <Header />
     <Appeal />
@@ -19,8 +20,10 @@ import Header from "@/components/main/main.vue";
 import Card from "@/components/sponsor/card.vue";
 import Time from "@/components/time/time.vue";
 import Footer from "@/components/footer/footer.vue";
+import ParticlesHeader from "@/components/header.vue";
+import router from "@/router/index.js";
 function login() {
-    window.open('/login')
+    router.push('/login')
 }
 </script>
 

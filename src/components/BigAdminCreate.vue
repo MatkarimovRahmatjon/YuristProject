@@ -59,9 +59,7 @@
           🔄 Yangilash
         </button>
       </div>
-    </div>
-
-    <!-- Delete Modal -->
+    </div><!-- Delete Modal -->
     <div v-if="asd" class="fixed inset-0 flex items-center z-10 justify-center bg-black bg-opacity-50">
       <div class="bg-white p-6 rounded-lg w-11/12 max-w-sm text-center">
         <h2 class="text-lg font-semibold">Haqiqatan ham o‘chirishni xohlaysizmi?</h2>
@@ -89,7 +87,7 @@
       <div v-for="item in data" @click="path(item.id)" :key="item.id"
            class="relative flex flex-col md:flex-row items-center justify-between p-4 bg-white shadow-md mb-4 rounded-lg border border-gray-200">
         <div class="w-16 h-16 flex-shrink-0 rounded-full overflow-hidden border border-gray-300">
-          <img :src="getImageUrl(item.img)" class="w-full h-full object-cover" alt="Admin Image" />
+          <img :src="getImageUrl(item.img)" class="w-full  h-full object-cover" alt="Admin Image" />
         </div>
 
         <div class="ml-4 flex-grow">
@@ -100,7 +98,7 @@
 
         <div class="relative">
           <button @click="toggleModal(item.id)"
-                  class="text-gray-500 hover:text-gray-700 text-2xl p-2">
+                  class="text-gray-500 bg-red-500 z-30  hover:text-gray-700 text-2xl p-2">
             ⋮
           </button>
 
@@ -172,9 +170,7 @@ const openEditModal = (item) => {
   updatedJshhr.value = item.jshhr;
   updatedPhone.value = item.phone;
   PutModal.value = true;
-};
-
-const openDeleteModal = (id) => {
+};const openDeleteModal = (id) => {
   selectedId.value = id;
   asd.value = true;
 };
@@ -183,13 +179,13 @@ const getData = async () => {
   try {
     const token = localStorage.getItem("token");
     const response = await axios.get(`${URL}/admin`, {
-      headers: {Authorization: `Bearer ${token}`},
-    });
+    headers: {Authorization:` Bearer ${token}`},
+  });
     console.log(response.data);
-    data.value = response.data.sort((a, b) => a.id - b.id);
-  } catch (error) {
-    console.error("Xatolik:", error);
-  }
+  data.value = response.data.sort((a, b) => a.id - b.id);
+} catch (error) {
+  console.error("Xatolik:", error);
+}
 };
 
 const sortedData = computed(() => data.value);
@@ -214,27 +210,27 @@ async function post() {
   try {
     const token = localStorage.getItem("token");
     await axios.post(`${URL}/admin`, formData, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    getData();
-    qwe.value = false;
-  } catch (error) {
-    console.error("Xatolik:", error);
-    err.value = "Admin yaratishda xatolik!";
-  }
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  getData();
+  qwe.value = false;
+} catch (error) {
+  console.error("Xatolik:", error);
+  err.value = "Admin yaratishda xatolik!";
+}
 }
 
 async function updateAdmin() {
   const formData = new FormData();
   formData.append("name", updatedName.value);
   formData.append("surname", updatedSurname.value);
-  formData.append("dadname", updatedFatherName.value);
+  formData.append("dadname", updatedFatherName.value); // To'g'ri nom bilan
   formData.append("username", updatedUsername.value);
-  formData.append("usercode", updatedPassport.value);
-  formData.append("", updatedJshhr.value);
+  formData.append("userCode", updatedPassport.value); // To'g'ri nom bilan
+  formData.append("userCode", updatedJshhr.value); // To'g'ri nom bilan
   formData.append("phone", updatedPhone.value);
   if (updatedImage.value) formData.append("image", updatedImage.value);
 
@@ -242,7 +238,7 @@ async function updateAdmin() {
     const token = localStorage.getItem("token");
     await axios.put(`${URL}/admin/${selectedId.value}`, formData, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization:` Bearer ${token}`,
         "Content-Type": "multipart/form-data",
       },
     });
@@ -254,11 +250,12 @@ async function updateAdmin() {
   }
 }
 
+
 async function removeAdmin() {
   const token = localStorage.getItem("token");
   await axios.delete(`${URL}/admin/${selectedId.value}`, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization:` Bearer ${token}`,
     },
   });
   getData();
@@ -274,7 +271,7 @@ function handleImageUploadUpdate(event) {
 }
 
 const getImageUrl = (img) => {
-  return img ? `${URL}/upload/${img}` : "/default-avatar.png";
+  return img ?` ${URL}/upload/${img}` : "/default-avatar.png";
 };
 
 getData();

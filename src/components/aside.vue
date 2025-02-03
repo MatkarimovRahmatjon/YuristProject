@@ -1,11 +1,11 @@
 <script setup>
 const menuItems = [
   {id: 1, text: "Sudlar ro'yxati", url: "/admin"},
-  {id: 2, text: "Interaktiv xizmatlar ro'yxati", url: "/appeals"},
-  {id: 3, text: "Hamkorlar ro'yxati", url: "/partners"},
+  {id: 2, text: "Interaktiv xizmatlar ro'yxati", url: "/appeal"},
   {id: 3, text: "Yuristlar ro'yxati", url: "/yurists"},
   {id: 4, text: "Adminlar ro'yxati", url: "/admins"},
-  {id: 4, text: "Operatorlar ro'yxati", url: "/operators"},
+  {id: 5, text: "Operatorlar ro'yxati", url: "/operators"},
+  {id: 6, text: "Hamkorlar ro'yxati", url: "/partners"},
 ];
 </script>
 
@@ -29,8 +29,8 @@ const menuItems = [
   color: white;
   padding-top: 20px;
   position: fixed;
-  inset: 0;
-}
+  top: 200px;
+  }
 
 ul {
   list-style: none;
