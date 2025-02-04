@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex text-white justify-center items-center md:justify-between px-3 w-full h-[100px] md:h-[150px] lg:h-[200px] opacity-[88%] relative bg-[#0033FF]">
+    class="flex mt-12 text-white justify-center items-center md:justify-between px-3 w-full h-[100px] md:h-[150px] lg:h-[200px] opacity-[88%] relative bg-[#0033FF]">
     <div id="particles-js" class="absolute top-0 left-0 w-full h-full"></div>
     <b class="lg:text-[25px] text-center w-full md:w-[40%] lg:w-[35%] z-0 uppercase hidden lg:block"
       style="text-shadow: 2px 2px 50px white;">

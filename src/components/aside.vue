@@ -10,7 +10,7 @@ const menuItems = [
 </script>
 
 <template>
-  <aside class="aside-nav">
+  <aside class="aside-nav bg-blue-800">
     <nav>
       <ul>
         <li v-for="item in menuItems" :key="item.id" class="my-1">
@@ -23,9 +23,8 @@ const menuItems = [
 
 <style scoped>
 .aside-nav {
-  width: 280px;
+  width: 420px;
   height: 100vh;
-  background-color: #1e3a8a;
   color: white;
   padding-top: 20px;
   position: fixed;
@@ -40,8 +39,11 @@ ul {
 
 li {
   padding: 15px 20px;
-  background-color: #1e88e5;
+  background-color: #f0d73a;
+  color: black;
   transition: background-color 0.3s;
+  transition-duration: 500ms;
+
 }
 
 router-link {
@@ -54,5 +56,7 @@ router-link {
 li:hover {
   background-color: rgba(229, 231, 235, 0.1);
   cursor: pointer;
+  color: white;
+  transition-duration: 500ms;
 }
 </style>

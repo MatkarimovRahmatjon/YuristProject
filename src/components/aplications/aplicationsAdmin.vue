@@ -1,10 +1,4 @@
 <template>
-<div class="flex items-center justify-between">
-  <Aside />
-  <div>
-
-
-
   <div v-if="showModal"
     class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
     <div
@@ -78,7 +72,7 @@
     </div>
   </div>
 
-  <div class="flex flex-col w-[130%] items-center py-10">
+  <div class="flex flex-col items-center py-10">
     <div class="w-full flex justify-end p-6">
       <button @click="toggleModal" class="text-lg font-medium py-2 px-4 bg-lime-500 hover:bg-lime-600 rounded-lg">
         Add +
@@ -107,8 +101,6 @@
       </div>
     </div>
   </div>
-  </div>
-</div>
 </template>
 <script setup>
 import { watch } from "vue";

@@ -1,15 +1,15 @@
 <template>
   <div v-if="showModal"
-       class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
+       class="fixed inset-0 z-50  h-full flex items-center bg-black bg-opacity-50 justify-center">
     <div
-        class="absolute h-64 w-96 bg-slate-800 flex flex-col opacity-[90%] items-center justify-center p-10 rounded-[15px]">
+        class=" bg-slate-800 flex flex-col opacity-[90%] items-center justify-center p-10 rounded-[15px]">
       <img @click="toggleModal" class="w-14 -mr-[290px] absolute -mt-44" src="../../../public/reject.png" alt=""/>
       <Upload/>
     </div>
   </div>
   <div v-if="PutModal" class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
     <div
-        class="absolute h-64 w-96 bg-slate-800 flex flex-col opacity-[90%] items-center justify-center p-10 rounded-[15px]">
+        class="absolute  bg-slate-800 flex flex-col opacity-[90%] items-center justify-center p-10 rounded-[15px]">
       <img @click="Modal" class="w-14 -mr-[290px] absolute -mt-44" src="../../../public/reject.png" alt=""/>
       <div>
         <form @submit.prevent="updateCourt">

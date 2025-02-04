@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full fixed mb-32 top-0 mx-auto">
+    <div class="w-full fixed mb-32 top-0 z-40 mx-auto">
       <!-- Loading State -->
       <div v-if="loading" class="text-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-profile-blue mx-auto"></div>
@@ -50,11 +50,8 @@
     </div>
 
     <div class="flex">
-      <!-- Aside komponenti -->
       <Aside class="fixed left-0 top-0 h-full w-64"/>
-
-      <!-- Asosiy kontent -->
-      <main class="flex-1 ml-64 p-4">
+      <main class="flex-1 ml-[420px] p-4 mt-20">
         <router-view/>
       </main>
     </div>
