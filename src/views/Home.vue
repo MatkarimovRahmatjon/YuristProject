@@ -1,10 +1,4 @@
 <template>
-    <div class="absolute top-0">
-        <button @click="login()"
-            class="bg-[#223B9E] hover:bg-blue-  00 duration-500 py-1 mx-1 my-1 px-8 text-[25px] rounded-[35px]">
-            Login
-        </button>
-    </div>
     <ParticlesHeader />
     <Time />
     <Header />

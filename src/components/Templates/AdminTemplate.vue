@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="w-full  fixed mb-32 top-0 mx-auto p-6">
+    <div class="w-full fixed mb-32 top-0 mx-auto">
       <!-- Loading State -->
-      <div v-if="loading" class="text-center py-8">
+      <div v-if="loading" class="text-center">
         <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-profile-blue mx-auto"></div>
         <p class=" text-gray-600">Loading profile data...</p>
       </div>
@@ -13,11 +13,11 @@
       </div>
 
       <!-- Profile Content -->
-      <div v-else-if="userInfo" class="max-h-[200px] bg-blue-800 flex rounded-lg shadow-md p-6">
+      <div v-else-if="userInfo" class="max-h-[200px] bg-blue-800 flex p-2">
         <!-- Profile Header -->
         <div class="flex gap-6 mb-8">
           <!-- Profile Image -->
-          <div class="w-48 h-48 border-2 border-profile-blue rounded-lg overflow-hidden">
+          <div class="w-44 h-44 border-2 border-profile-blue rounded-lg overflow-hidden">
             <img
                 :src="getImageUrl(userInfo.img)"/>
           </div>
@@ -41,46 +41,36 @@
             </div>
           </div>
         </div>
-
-        <!-- Profile Details -->
-        <div class="flex-wrap flex items-start space-y-3">
-          <div v-for="(value, key) in {
-          'Ism va familya': userInfo.name,
-          'Passport raqami': userInfo.passportNumber,
-          'Fuqaroning JSHSHIR raqami': userInfo.usercode,
-          'Fuqaroning logini': userInfo.username,
-          'Fuqaroning mobil telefon raqami': userInfo.phone
-        }" :key="key"
-               class="flex p-3 w-[300px] hover:bg-white group duration-500 border  rounded-md">
-            <span class=" group-hover:text-black min-w-[200px] font-medium duration-500">{{ key }} :</span>
-            <span class="flex-1 group-hover:text-black duration-500 ">{{ value }}</span>
-          </div>
-        </div>
+        <div class=" h-[180px] flex flex-col flex-wrap">
+          <h1 class="p-2 pr-10 m-2 border">foydalanuvchini
+          {{ userInfo.name }} {{ userInfo.surname }} {{ userInfo.dadname }}</h1>
+          <h1 class="p-2 pr-10 m-2 border">foydalanuvchini telefon raqami: {{ userInfo.phone }}</h1>
+          <h1 class="p-2 pr-10 m-2 border">foydalanuvchini JSHSHR: {{ userInfo.userCode }}</h1></div>
       </div>
     </div>
 
-    <div class="flex mt-[300px] h-screen">
+    <div class="flex">
       <!-- Aside komponenti -->
-      <Aside class="fixed left-0 top-0 h-full w-64" />
+      <Aside class="fixed left-0 top-0 h-full w-64"/>
 
       <!-- Asosiy kontent -->
-      <main class="flex-1 ml-64 p-4 overflow-y-auto">
-        <router-view />
+      <main class="flex-1 ml-64 p-4">
+        <router-view/>
       </main>
     </div>
   </div>
 </template>
-
 <script setup>
-import { ref, onMounted } from "vue";
+import {ref, onMounted} from "vue";
 import Aside from "../aside.vue";
 import axios from "axios";
-import { URL } from "@/auth/url.js";
+import {URL} from "@/auth/url.js";
 
 
 const id = localStorage.getItem("id");
 const newId = id ? parseInt(id) : null;
-
+const loading = ref(false)
+const error = ref(false)
 
 if (!newId || isNaN(newId)) {
   console.error("ID topilmadi yoki noto'g'ri formatda.");
@@ -99,10 +89,10 @@ const getData = async () => {
     }
 
     const response = await axios.get(`${URL}/admin/${newId}`, {
-      headers: {Authorization:` Bearer ${token}`},
+      headers: {Authorization: ` Bearer ${token}`},
     });
-    userInfo.value=response.data
-    console.log(data.value)
+    userInfo.value = response.data
+    console.log(response)
   } catch (error) {
     console.error("Xatolik:", error.response?.data || error.message);
   }

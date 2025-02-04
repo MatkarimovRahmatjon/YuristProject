@@ -100,7 +100,7 @@ console.log(id.value)
       } else if (typeof role !== "string") {
         error.value = "Noto‘g‘ri rol formati.";
       } else if (role.trim() === "admin") {
-        router.push(`/admin/${id.value}`);
+        router.push(`/admin`);
       } else if (role.trim() === "bigAdmin") {
         router.push(`/admin`);
       } else {
