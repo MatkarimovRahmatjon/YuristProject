@@ -51,7 +51,7 @@
 
     <div class="flex">
       <Aside class="fixed left-0 top-0 h-full w-64"/>
-      <main class="flex-1 ml-[420px] p-4 mt-20">
+      <main class="flex-1 ml-[420px] p-4 mt-64">
         <router-view/>
       </main>
     </div>

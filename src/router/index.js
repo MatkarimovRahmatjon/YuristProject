@@ -31,7 +31,8 @@ const routes = [
             {path: "/profile/:id", component: () => import("@/components/ProfilePage/Profile.vue")},
             {path: "/ServiceAdmin/:id", component: () => import("@/components/admin/ServiceAdmin.vue")},
             {path: "/aplicationsAdmin/:id", component: () => import("@/components/aplications/aplicationsAdmin.vue")},
-            {path: "/AdminPath/:id", component: ()=> import("@/components/path/adminPath.vue")}
+            {path: "/AdminPath/:id", component: ()=> import("@/components/path/adminPath.vue")},
+            {path: "/setting/:id", component: ()=> import("@/components/setting.vue")}
         ],
     },
 ];

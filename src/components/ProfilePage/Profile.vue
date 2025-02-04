@@ -20,7 +20,9 @@ const fetchUserData = async () => {
     const response = await axios.get(`http://45.146.166.100:3000/admin/${id.value}`, {
       headers: {Authorization: `Bearer ${token}`},
     })
+    console.log(response.data)
     userInfo.value = response.data
+
     console.log(userInfo.value)
   } catch (err) {
     error.value = 'Failed to load user data'

@@ -44,6 +44,10 @@
             <img class="w-10 mr-5" src="../../../public/remove.png" alt="">
             O'chirish
           </button>
+
+          <button @click="push" class="py-4 rounded-[15px] h-[70px] items-center text-black flex w-full min-w-[250px] duration-500 text-[20px] px-10 bg-[#FF0C0C] hover:red-700">
+          setting
+        </button>
         </div>
       </div>
     </div>
@@ -108,10 +112,17 @@ const selectedId = ref(null);
 const toggleModal = () => {
   showModal.value = !showModal.value;
 };
+
+const id=localStorage.getItem("id")
+const adminId =parseInt(id)
+
 const Modal = () => {
   PutModal.value = !PutModal.value;
   asd.value = !asd.value
 };
+function push() {
+  router.push(`/setting/${selectedId.value}`);
+}
 const func = async (id) => {
   selectedId.value = id;
   PutId.value = id;
@@ -147,13 +158,22 @@ const getData = async () => {
     const response = await fetch(url);
     if (response.ok) {
       const result = await response.json();
-      datakril.value = result
+
+      // `allowed` massivida userId lar [1, 2, 3] kabi bo‘lsa:
+      // const filteredData = result.filter(court => court.allowed.includes(adminId));
+      // Agar `allowed` massivida obyektlar `{ userId: 1 }` shaklida bo‘lsa:
+       const filteredData = result.filter(court => court.allowed.some(user => user.userId === adminId));
+      console.log(filteredData);
+
+      datakril.value = filteredData
           .sort((a, b) => a.id - b.id)
           .map(item => ({
             ...item,
-            translatedName: translateText(item.name) // Kirillchaga o‘girib qo‘shish
+            translatedName: translateText(item.name)
           }));
-      data.value = result;
+
+      data.value = filteredData;
+      console.log(filteredData);
     } else {
       console.error("Ma'lumotlarni olishda xatolik:", response.statusText);
     }
@@ -161,6 +181,8 @@ const getData = async () => {
     console.error("Xatolik:", error);
   }
 };
+
+
 const removeSelectedItems = async () => {
   if (!selectedId.value) return;
   try {
@@ -258,4 +280,3 @@ onMounted(() => {
   getData();
 });
 </script>
-                                                                                                                                                  

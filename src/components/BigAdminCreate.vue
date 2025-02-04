@@ -127,7 +127,7 @@ import Time from "@/components/time/time.vue";
 import {URL} from "@/auth/url";
 import router from "@/router/index.js";
 const path =(id)=>{
-  router.push(`/profile/${id}`)
+  // router.push(`/profile/${id}`)
 }
 const modalOpen = ref(null); // Modal ochiq bo'lgan adminni
 const data = ref([]);
@@ -199,10 +199,10 @@ async function post() {
   const formData = new FormData();
   formData.append("name", name.value);
   formData.append("surname", surname.value);
-  formData.append("fatherName", fatherName.value);
+  formData.append("dadname", fatherName.value);
   formData.append("username", username.value);
-  formData.append("passport", passport.value);
-  formData.append("jshhr", jshhr.value);
+  formData.append("userCode", passport.value);
+  formData.append("uniqueCode", jshhr.value);
   formData.append("phone", phone.value);
   formData.append("password", password2.value);
   if (image.value) formData.append("image", image.value);
