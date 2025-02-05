@@ -164,10 +164,10 @@ const openEditModal = (item) => {
   selectedId.value = item.id;
   updatedName.value = item.name;
   updatedSurname.value = item.surname;
-  updatedFatherName.value = item.fatherName;
+  updatedFatherName.value = item.dadname;
   updatedUsername.value = item.username;
-  updatedPassport.value = item.passport;
-  updatedJshhr.value = item.jshhr;
+  updatedPassport.value = item.userCode;
+  updatedJshhr.value = item.uniqueCode;
   updatedPhone.value = item.phone;
   PutModal.value = true;
 };const openDeleteModal = (id) => {
@@ -227,10 +227,10 @@ async function updateAdmin() {
   const formData = new FormData();
   formData.append("name", updatedName.value);
   formData.append("surname", updatedSurname.value);
-  formData.append("dadname", updatedFatherName.value); // To'g'ri nom bilan
+  formData.append("dadname", updatedFatherName.value);
   formData.append("username", updatedUsername.value);
-  formData.append("userCode", updatedPassport.value); // To'g'ri nom bilan
-  formData.append("userCode", updatedJshhr.value); // To'g'ri nom bilan
+  formData.append("userCode", updatedPassport.value);
+  formData.append("uniqueCode", updatedJshhr.value);
   formData.append("phone", updatedPhone.value);
   if (updatedImage.value) formData.append("image", updatedImage.value);
 

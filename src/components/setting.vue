@@ -1,105 +1,3 @@
-<script setup>
-import {useRoute} from "vue-router";
-import {ref, onMounted} from "vue";
-import {URL} from "@/auth/url.js";
-import axios from "axios";
-
-const route = useRoute();
-const id = ref(null);
-const admins = ref([]);
-const allowedUsers = ref([]);
-const matchedAdmins = ref([]);
-const selectedAdminId = ref(null);
-const qwe = ref(false);
-
-const getAdmins = async () => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await axios.get(`${URL}/admin`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    admins.value = response.data;
-  } catch (error) {
-    console.error("Xatolik (getAdmins):", error);
-  }
-};
-
-const getAllowedUsers = async (courtId) => {
-  try {
-    const response = await axios.get(`${URL}/allowed-users/${courtId}`);
-    allowedUsers.value = response.data;
-    matchUsers();
-  } catch (error) {
-    console.error("Xatolik (getAllowedUsers):", error);
-  }
-};
-
-const matchUsers = () => {
-  matchedAdmins.value = admins.value.filter((admin) =>
-      allowedUsers.value.some((allowedUser) => allowedUser.userId === admin.id)
-  );
-};
-
-const addUserToAllowed = async () => {
-  if (!selectedAdminId.value) {
-    console.error("Hech qanday admin tanlanmadi!");
-    return;
-  }
-
-  try {
-    const response = await axios.post(
-        `${URL}/allowed-users/${id.value}/${selectedAdminId.value}`
-    );
-    console.log("User muvaffaqiyatli qo‘shildi:", response.data);
-    getAllowedUsers(id.value);
-  } catch (error) {
-    console.error("Xatolik:", error);
-  }
-};
-
-const removeUserFromAllowed = async (courtId, userId) => {
-  try {
-    const response = await axios.delete(`${URL}/allowed-users/${courtId}/${userId}`);
-    console.log("User muvaffaqiyatli o‘chirildi:", response.data);
-    getAllowedUsers(courtId);
-  } catch (error) {
-    console.error("Xatolik:", error);
-  }
-};
-
-const handleCheckbox = (adminId) => {
-  selectedAdminId.value = selectedAdminId.value === adminId ? null : adminId;
-};
-
-const deleteAllowed = (userId) => {
-  removeUserFromAllowed(id.value, userId);
-};
-
-onMounted(() => {
-  id.value = route.params.id;
-  if (id.value) {
-    getAdmins();
-    getAllowedUsers(id.value);
-  }
-});
-</script>
-
-<style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-</style>
-
 <template>
   <div v-if="qwe" class="fixed z-10 inset-0 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-blue-600 p-6 rounded-lg w-11/12 max-w-md">
@@ -111,7 +9,7 @@ li {
             :value="item.id"
             @change="() => handleCheckbox(item.id)"
             :checked="selectedAdminId === item.id"
-            class="  rounded-md"
+            class="rounded-md"
         />
       </div>
       <button @click="addUserToAllowed" class="mt-4 px-4 py-2 bg-white text-black rounded">Yuborish</button>
@@ -124,13 +22,145 @@ li {
 
   <div>
     <ul>
-      <li v-for="admin in matchedAdmins" :key="admin.id" class="flex items-center justify-between bg-[#223B9E]">
+      <li v-for="admin in admins" :key="admin.id" class="flex items-center justify-between bg-[#223B9E] p-4 rounded-md">
         <div class="flex gap-4">
-        <h1>{{ admin.name }} {{ admin.surname }}</h1>
-          <h1>Lavozimi: {{admin.role}}</h1>
+          <h1>{{ admin.name }} {{ admin.surname }}</h1>
+          <h1>Lavozimi: {{ admin.role }}</h1>
         </div>
-        <button class="bg-[#D90E0E] px-4 py-2 rounded-md" @click="deleteAllowed(admin.id)">O'chirish</button>
+        <label class="switch">
+          <input type="checkbox" :checked="admin.isAllowed" @change="() => toggleAdminAccess(admin)">
+          <span class="slider round"></span>
+        </label>
       </li>
     </ul>
   </div>
 </template>
+
+<script setup>
+import { useRoute } from "vue-router";
+import { ref, onMounted } from "vue";
+import { URL } from "@/auth/url.js";
+import axios from "axios";
+
+const route = useRoute();
+const id = ref(null);
+const admins = ref([]);
+const allowedUsers = ref([]);
+const qwe = ref(false);
+
+const getAdmins = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${URL}/admin`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    admins.value = response.data;
+    updateAdminStatuses();
+  } catch (error) {
+    console.error("Xatolik (getAdmins):", error);
+  }
+};
+
+const getAllowedUsers = async (courtId) => {
+  try {
+    const response = await axios.get(`${URL}/allowed-users/${courtId}`);
+    allowedUsers.value = response.data;
+    updateAdminStatuses();
+  } catch (error) {
+    console.error("Xatolik (getAllowedUsers):", error);
+  }
+};
+
+const updateAdminStatuses = () => {
+  admins.value.forEach(admin => {
+    admin.isAllowed = allowedUsers.value.some(user => user.userId === admin.id);
+  });
+};
+
+const addUserToAllowed = async (admin) => {
+  try {
+    await axios.post(`${URL}/allowed-users/${id.value}/${admin.id}`);
+    getAllowedUsers(id.value);
+  } catch (error) {
+    console.error("Xatolik (addUserToAllowed):", error);
+  }
+};
+
+const removeUserFromAllowed = async (admin) => {
+  try {
+    await axios.delete(`${URL}/allowed-users/${id.value}/${admin.id}`);
+    getAllowedUsers(id.value);
+  } catch (error) {
+    console.error("Xatolik (removeUserFromAllowed):", error);
+  }
+};
+
+const toggleAdminAccess = async (admin) => {
+  try {
+    if (admin.isAllowed) {
+      await removeUserFromAllowed(admin);
+    } else {
+      await addUserToAllowed(admin);
+    }
+  } catch (error) {
+    console.error("Xatolik (toggleAdminAccess):", error);
+  }
+};
+
+onMounted(() => {
+  id.value = route.params.id;
+  if (id.value) {
+    getAdmins();
+    getAllowedUsers(id.value);
+  }
+});
+</script>
+
+<style scoped>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 34px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #09FF52;
+}
+
+input:checked + .slider:before {
+  transform: translateX(14px);
+}
+</style>

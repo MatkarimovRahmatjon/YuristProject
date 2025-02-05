@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="top-0">
     <!-- Til tanlash dropdown -->
-    <div class="flex z-50 fixed top-0 right-0 justify-end p-2">
+    <div class="flex z-50 fixed top-0 right-0 justify-end p-1">
       <div class="relative">
         <button @click="toggleDropdown"
                 class="flex items-center gap-2 bg-blue-700 hover:bg-blue-800 rounded-lg px-4 py-2 shadow-md">
