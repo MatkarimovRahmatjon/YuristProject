@@ -151,11 +151,11 @@ const Modal = () => {
 
 const func = (id) => {
   PutId.value = id;
-  Id.value = id; // Fix: Changed `selectedId` to `Id` for consistency
+  Id.value = id; 
   asd.value = !asd.value
 };
 const goToPath = (id) => {
-  router.push(`/ServiceAdmin/${id}`); // Fix: Corrected the path with backticks
+  router.push(`/ServiceAdmin/${id}`); 
 };
 
 const onFileChange = (event) => {
@@ -193,7 +193,6 @@ const translitMap = {
   t: "т", u: "у", v: "в", x: "х", y: "й", z: "з", "'": "ъ"
 };
 
-// Function to translate text from Latin to Cyrillic
 const translateText = (text) => {
   if (!text) return "";
   let translated = text.toLowerCase();
@@ -210,9 +209,7 @@ const getData = async () => {
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
     const result = await response.json();
-    ("Kelgan ma'lumot:", result); // Ma'lumotni tekshirish
-
-    // Ma'lumotni tekshirib, to'g'ri formatga o'tkazamiz
+    ("Kelgan ma'lumot:", result);
     if (Array.isArray(result)) {
       datakril.value = result.map(item => ({
         ...item,

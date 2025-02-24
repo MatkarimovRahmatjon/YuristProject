@@ -14,16 +14,8 @@ const routes = [
     { path: "/service/:id", name: "service", component: () => import("@/components/main/file/file.vue") },
     { path: "/offering", name: "offer", component: () => import("@/components/offering/OfferingAdmin.vue") },
     { path: "/appeals", name: "appeals", component: () => import("@/components/appeal/appeal.vue") },
-    {
-        path: "/aplications/:id",
-        name: "aplications",
-        component: () => import("@/components/main/aplications/aplications.vue")
-    },
-    {
-        path: "/:catchAll(.*)",
-        component: () => import("@/components/error.vue"),
-        props: { errorCode: 404 }
-    },
+    { path: "/aplications/:id", name: "aplications", component: () => import("@/components/main/aplications/aplications.vue") },
+    { path: "/:catchAll(.*)", component: () => import("@/components/error.vue"), props: { errorCode: 404 } },
     {
         path: "/admin", component: () => import("@/components/Templates/AdminTemplate.vue"),
         children: [
@@ -39,17 +31,20 @@ const routes = [
             { path: "/AdminPath/:id", component: () => import("@/components/main/path/adminPath.vue") },
             { path: "/setting/:id", component: () => import("@/components/settings/setting.vue") },
             { path: "/AdminCon/:id", component: () => import("@/components/settings/AdminCon.vue") },
-            { path: "/UserInfoFiles/:id", component: () => import("@/components/main/info/UserInfoFiles.vue") },
-            { path: "/UserFilePage/:id", component: () => import("@/components/main/info/UserFilePage.vue") },
-            { path: "/UserTasksFiles/:id", component: () => import("@/components/main/tasks/UserInfoFiles.vue") },
-            { path: "/UserTasksFilePage/:id", component: () => import("@/components/main/tasks/UserFilePage.vue") },
-            { path: "/UserObligationsFiles/:id", component: () => import("@/components/main/obligations/UserInfoFiles.vue") },
-            { path: "/UserObligationsFilePage/:id", component: () => import("@/components/main/obligations/UserFilePage.vue") },
             { path: "/notifications/:id", component: () => import("@/components/main/notifications.vue") },
             { path: "/archive", component: () => import("@/components/archive/archiveMain.vue") },
             { path: "/archiveBody/:data", component: () => import("@/components/archive/archiveBody.vue") },
             { path: "/chat/:id", component: () => import("@/components/Message/Message.vue") },
             { path: "/videoChat", component: () => import("@/components/Message/videochat.vue") },
+            { path: "/Requirefiles", component: () => import("@/components/RequireFile/Requirefiles.vue") },
+            { path: "/Requirefile/:id", component: () => import("@/components/RequireFile/RequireFile.vue") },
+            { path: "/requireUserInfoFiles", component: () => import("@/components/RequireFile/info/requireUserInfoFiles.vue") },
+            { path: "/info/:id", component: () => import("@/components/RequireFile/info/info.vue") },
+            { path: "/requireUserTasksFiles", component: () => import("@/components/RequireFile/tasks/requireUserTasksFiles.vue") },
+            { path: "/tasks/:id", component: () => import("@/components/RequireFile/tasks/tasks.vue") },
+            { path: "/requireUserobligationsFiles", component: () => import("@/components/RequireFile/obligations/requireUserObligationsFiles.vue") },
+            { path: "/payments", component: () => import("@/components/payments.vue") },
+            { path: "/obligations/:id", component: () => import("@/components/RequireFile/obligations/obligations.vue") },
         ],
     },
 ];

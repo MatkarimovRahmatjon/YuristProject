@@ -48,10 +48,8 @@ export default {
         errorMessage.value = "";
         courtName.value = "";
         file.value = null;
-
-        // Ensuring that the UI updates first before reloading
         nextTick(() => {
-          window.location.reload(); // Reload the page after the form is updated
+          window.location.reload(); 
         });
       } catch (error) {
         errorMessage.value = "Yuklashda xato yuz berdi!";

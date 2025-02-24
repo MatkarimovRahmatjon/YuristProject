@@ -16,7 +16,7 @@
 
   <div>
     <ul>
-      <li v-for="admin in admins" :key="admin.id" class="flex items-center justify-between bg-[#223B9E] p-4 rounded-md">
+      <li v-for="admin in admins" :key="admin.id" class="flex items-center justify-between my-2 bg-[#223B9E] p-4 rounded-md">
         <div class="flex gap-4">
           <h1>{{ admin.name }} {{ admin.surname }}</h1>
           <h1>Lavozimi: {{ admin.role }}</h1>

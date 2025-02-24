@@ -31,6 +31,7 @@
     <RouterView v-else />
   </div>
 </template>
+
 <script setup>
 import { ref, inject, watchEffect, onMounted, provide } from 'vue';
 import { useI18n } from 'vue-i18n';
@@ -70,6 +71,7 @@ onMounted(async () => {
   }
 });
 </script>
+
 <style>
 * {
   margin: 0;

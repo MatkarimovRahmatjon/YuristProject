@@ -54,7 +54,6 @@ const router = useRouter();
 const route = useRoute();
 const id1 = ref(route.params.id);
 
-// Transliteration Map for Latin to Cyrillic
 const translitMap = {
   ch: "ч", sh: "ш", yo: "ё", yu: "ю", ya: "я", ye: "е", "oʻ": "ў", "g‘": "ғ",
   a: "а", b: "б", d: "д", e: "э", f: "ф", g: "г", h: "ҳ", i: "и", j: "ж",
@@ -62,7 +61,6 @@ const translitMap = {
   t: "т", u: "у", v: "в", x: "х", y: "й", z: "з", "'": "ъ"
 };
 
-// Function to translate text from Latin to Cyrillic
 const translateText = (text) => {
   if (!text) return "";
   let translated = text.toLowerCase();
@@ -83,7 +81,6 @@ const getData = async () => {
 
     const result = await response.json();
 
-    // Ma'lumotni tekshirib, to'g'ri formatga o'tkazamiz
     if (Array.isArray(result)) {
       datakril.value = result.map(item => ({
         ...item,

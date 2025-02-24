@@ -109,11 +109,11 @@ const uploadCourt = async () => {
 
     try {
         const response = await axios.post(`${URL}/map`, { source: courtName.value });
-        if (response.status === 200) { // Agar muvaffaqiyatli javob olsa
+        if (response.status === 200) {
             successMessage.value = "map muvaffaqiyatli yuklandi!";
-            courtName.value = ""; // Matn maydonini tozalash
-            getData(); // Ma'lumotlarni yangilash
-            showModal.value = false; // Modalni yopish
+            courtName.value = ""; 
+            getData(); 
+            showModal.value = false; 
         } else {
             errorMessage.value = "Xatolik yuz berdi!";
         }
@@ -183,11 +183,10 @@ const updateCourt = async () => {
     }
 };
 watch([showModal, PutModal, asd], ([modalOpen, asdOpen, deleteModalOpen]) => {
-    // Agar modal ochilsa, skrollni bloklaymiz
+
     if (modalOpen || deleteModalOpen || asdOpen) {
         document.body.style.overflow = 'hidden';
     } else {
-        // Modal yopilsa, skrollni tiklaymiz
         document.body.style.overflow = '';
     }
 });

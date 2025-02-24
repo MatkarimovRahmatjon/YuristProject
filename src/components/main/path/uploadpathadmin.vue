@@ -35,32 +35,28 @@ export default {
       file.value = event.target.files[0];
     };
 
-    const id = router.params.id; // Get the ID from the route parameters
+    const id = router.params.id;
 
     const uploadCourt = async () => {
       const formData = new FormData();
       formData.append("name", courtName.value);
       formData.append("file", file.value);
-      formData.append("courtsId", +id); // Sending courtsId with the form data
+      formData.append("courtsId", +id); 
 
       try {
-        // Sending the form data via POST request
+
         await axios.post(`${URL}/service`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
         });
 
-        // Update messages and reset form fields
         successMessage.value = "Service muvaffaqiyatli yuklandi!";
         errorMessage.value = "";
         courtName.value = "";
         file.value = null;
-
-        // Ensure the page is refreshed after the successful upload
         window.location.reload();
       } catch (error) {
-        // Handle any errors
         errorMessage.value = "Yuklashda xato yuz berdi!";
         successMessage.value = "";
       }

@@ -134,7 +134,7 @@ const getData = async () => {
     const response = await fetch(`${url}/${id1.value}`);
     if (response.ok) {
       const result = await response.json();
-      data.value = result.services.sort((a, b) => a.id - b.id); // Tartiblash
+      data.value = result.services.sort((a, b) => a.id - b.id);
 
     } else {
       console.error("Ma'lumotlarni olishda xatolik:", response.statusText);
@@ -168,7 +168,6 @@ const goToPath = (id) => {
   router.push(`/aplicationsAdmin/${id}`);
 };
 
-// upload
 const courtName = ref("");
 const file = ref(null);
 const successMessage = ref("");
@@ -199,7 +198,7 @@ const uploadCourt = async () => {
     });
 
     if (response.status === 201) {
-      data.value.push(response.data); // Yangi elementni qo'shish
+      data.value.push(response.data);
       successMessage.value = "muvaffaqiyatli yuklandi!";
       errorMessage.value = "";
       courtName.value = "";
@@ -226,8 +225,6 @@ const updateCourt = async () => {
 
     if (response.status === 200) {
       const updatedCourt = response.data;
-
-      // `data` massivida elementni yangilash
       const index = data.value.findIndex((item) => item.id === PutId.value);
       if (index !== -1) {
         data.value[index] = updatedCourt;

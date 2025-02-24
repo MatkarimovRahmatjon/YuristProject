@@ -34,10 +34,10 @@ const fetchWordFile = async () => {
     if (!fileResponse.ok)
       throw new Error(`HTTP xato! Status: ${fileResponse.status}`);
 
-    const arrayBuffer = await fileResponse.arrayBuffer(); // ArrayBuffer'ga o'zgartiring
+    const arrayBuffer = await fileResponse.arrayBuffer(); 
 
-    const result = await mammoth.convertToHtml({ arrayBuffer }); // Faylni HTML'ga tahlil qilish
-    htmlContent.value = result.value; // Tahlil qilingan HTML'ni saqlash
+    const result = await mammoth.convertToHtml({ arrayBuffer });
+    htmlContent.value = result.value; 
   } catch (error) {
     console.error("Faylni olishda xatolik yuz berdi:", error.message);
     htmlContent.value =
@@ -45,7 +45,7 @@ const fetchWordFile = async () => {
   }
 };
 const goBack = () => {
-  router.push("/"); // Asosiy sahifaga qaytish
+  router.push("/"); 
 };
 onMounted(() => {
   fetchWordFile();

@@ -5,28 +5,53 @@
         <div class="flex gap-4">
           <h1>Adminlar ro'yxatini ko'rish uchun ruxsat</h1>
         </div>
-        <label class="switch">
-          <input type="checkbox" :checked="data.admins" @change="() => togglePermission('admins')">
-          <span class="slider round"></span>
-        </label>
+        <div class="flex gap-2">
+          <h1>On</h1>
+          <label class="switch">
+            <input type="checkbox" :checked="data.admins" @change="() => togglePermission('admins')">
+            <span class="slider round"></span>
+          </label>
+          <h1>Off</h1>
+        </div>
       </li>
       <li class="flex mb-2 items-center justify-between bg-[#223B9E] p-4 rounded-md">
         <div class="flex gap-4">
           <h1>Yuristlar ro'yxatini ko'rish uchun ruxsat</h1>
         </div>
-        <label class="switch">
-          <input type="checkbox" :checked="data.yurists" @change="() => togglePermission('yurists')">
-          <span class="slider round"></span>
-        </label>
+        <div class="flex gap-2">
+          <h1>On</h1>
+          <label class="switch">
+            <input type="checkbox" :checked="data.yurists" @change="() => togglePermission('yurists')">
+            <span class="slider round"></span>
+          </label>
+          <h1>Off</h1>
+        </div>
       </li>
       <li class="flex mb-2 items-center justify-between bg-[#223B9E] p-4 rounded-md">
         <div class="flex gap-4">
-          <h1>Operatorlar ro'yxatini ko'rish uchun ruxsat</h1>
+          <h1>Mudirlar ro'yxatini ko'rish uchun ruxsat</h1>
         </div>
-        <label class="switch">
-          <input type="checkbox" :checked="data.call_centres" @change="() => togglePermission('call_centres')">
-          <span class="slider round"></span>
-        </label>
+        <div class="flex gap-2">
+          <h1>On</h1>
+          <label class="switch">
+            <input type="checkbox" :checked="data.call_centres" @change="() => togglePermission('call_centres')">
+            <span class="slider round"></span>
+          </label>
+          <h1>Off</h1>
+        </div>
+      </li>
+      <li class="flex mb-2 items-center justify-between bg-[#223B9E] p-4 rounded-md">
+        <div class="flex gap-4">
+          <h1>Filelar ro'yxatini ko'rish uchun ruxsat</h1>
+        </div>
+        <div class="flex gap-2">
+          <h1>On</h1>
+          <label class="switch">
+            <input type="checkbox" :checked="data.userFiles" @change="() => togglePermission('userFiles')">
+            <span class="slider round"></span>
+          </label>
+          <h1>Off</h1>
+        </div>
       </li>
     </ul>
   </div>
@@ -46,6 +71,7 @@ const data = ref({
   admins: false,
   yurists: false,
   call_centres: false,
+  userFiles: false
 });
 
 const fetchPermissions = async () => {
@@ -58,7 +84,7 @@ const fetchPermissions = async () => {
     if (response.data.length > 0) {
       data.value = response.data[0];
     } else {
-      data.value = { admins: false, yurists: false, call_centres: false };
+      data.value = { admins: false, yurists: false, call_centres: false, userFiles: false };
     }
   } catch (error) {
     console.error('Failed to fetch permissions:', error);

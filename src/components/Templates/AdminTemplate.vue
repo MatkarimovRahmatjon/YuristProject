@@ -236,9 +236,9 @@ const getImageUrl = (img) => {
   return img ? `${URL}/upload/${img}` : "/default-avatar.png";
 };
 
-const go1 = (id) => router.push(`/UserInfoFiles/${id}`);
-const go2 = (id) => router.push(`/UserObligationsFiles/${id}`);
-const go3 = (id) => router.push(`/UserTasksFiles/${id}`);
+const go1 = (id) => router.push(`/requireUserInfoFiles`);
+const go2 = (id) => router.push(`/requireUserobligationsFiles`);
+const go3 = (id) => router.push(`/requireUserTasksFiles`);
 const gonotif = (id) => router.push(`/notifications/${id}`);
 const gochat1 = (id) => router.push(`/chat/${id}`);
 
@@ -251,7 +251,7 @@ const getData = async () => {
     const token = localStorage.getItem("token");
     if (!token) throw new Error("Токен топилмади. Фойдаланувчи авторизациядан ўтмаган.");
 
-    const response = await axios.get(`${URL}/admin/${newId}`, {
+    const response = await axios.get(`${URL}/${localStorage.getItem('role')}/${newId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -262,7 +262,7 @@ const getData = async () => {
       }
     }
     userInfoLotin.value = response.data
-    const onlineResponse = await axios.get(`${URL}/admin/online`, {
+    const onlineResponse = await axios.get(`${URL}/${localStorage.getItem('role')}/online`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -288,7 +288,7 @@ const fetchNotifications = async () => {
     const token = localStorage.getItem("token");
     if (!token) throw new Error("Токен топилмади. Фойдаланувчи авторизациядан ўтмаган.");
 
-    const response = await axios.get(`${URL}/admin/${newId}/notifications`, {
+    const response = await axios.get(`${URL}/${localStorage.getItem('role')}/${newId}/notifications`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -319,7 +319,7 @@ const checkOnlineStatus = (onlineAdmins) => {
 
 onMounted(() => {
   getData();
-  socket.emit("joinAdmin", id);
+  socket.emit("joinUser", id);
 
   socket.on("adminOnlineUpdate", checkOnlineStatus);
 

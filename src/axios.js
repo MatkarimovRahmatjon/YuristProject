@@ -6,12 +6,11 @@ const api = axios.create({
   baseURL: `${URL}`,
 });
 
-// 🔥 API xatosini avtomatik ushlash
 api.interceptors.response.use(
   response => response,
   error => {
     const errorCode = error.response?.status || 500;
-    inject("globalError", errorCode); // Xato App.vue ga yuboriladi
+    inject("globalError", errorCode);
     return Promise.reject(error);
   }
 );

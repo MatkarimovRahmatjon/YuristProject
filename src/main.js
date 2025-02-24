@@ -5,28 +5,40 @@ import router from './router';
 import { createI18n } from 'vue-i18n';
 import kril from "@/kril.json";
 import lotin from "@/lotin.json";
+import axios from "axios"; 
 
-// i18n sozlamalari
 const i18n = createI18n({
     legacy: false,
     locale: 'lotin',
     messages: { lotin, kril },
 });
 
-// Vue ilovasini yaratish
+const checkLocation = async () => {
+    try {
+        const response = await axios.get("https://ipwhois.app/json/");
+        const country = response.data.country_code; 
+        if (country !== "UZ") {
+            alert("Ushbu sayt faqat Oʻzbekiston hududida ishlaydi!");
+            window.location.href = "https://google.com";
+        }
+    } catch (error) {
+        console.error("Joylashuvni olishda xatolik:", error);
+    }
+};
+
+
 const app = createApp(App);
 
 app.use(i18n);
 app.use(router);
 
-// ✅ Global xatolarni provide qilish
-app.provide("globalError", null); // Dastlab null
+app.provide("globalError", null); 
 
-// Vue global xato ushlagich
 app.config.errorHandler = (err) => {
     console.error("Xatolik:", err);
-    app.provide("globalError", 500); // Xato bo‘lsa 500 yuboriladi
+    app.provide("globalError", 500); 
 };
 
-// Ilovani ekranga chiqarish
-app.mount('#app');
+checkLocation().then(() => {
+    app.mount('#app'); 
+});

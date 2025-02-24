@@ -9,7 +9,7 @@
         <h2 class="text-xl font-semibold text-black mb-4">Yangi Admin qo‘shish</h2>
         <input v-model="name" class="w-full text-black p-2 mb-3 border rounded-lg" placeholder="Ism" />
         <input v-model="surname" class="w-full text-black p-2 mb-3 border rounded-lg" placeholder="Familiya" />
-        <input v-model="fatherName" class="w-full text-black p-2 mb-3 border rounded-lg" placeholder="otasining ismi" />
+        <input v-model="fatherName" class="w-full text-black p-2 mb-3 border rounded-lg" placeholder="Otasining ismi" />
         <input v-model="passport" class="w-full text-black p-2 mb-3 border rounded-lg"
           placeholder="Passport Seriya Raqami" />
         <input v-model="jshhr" class="w-full text-black p-2 mb-3 border rounded-lg" placeholder="JSHHR" />
@@ -82,8 +82,8 @@
             alt="Close" />
         </div>
         <h2 class="text-xl font-semibold text-black mb-4">Parolni yangilash</h2>
-        <input v-model="updatedPassword" class="w-full p-2 mb-3 border text-black rounded-lg" placeholder="eski parol" />
-        <input v-model="updatednewPassword1" class="w-full p-2 mb-3 border text-black rounded-lg" placeholder="yangi parol" />
+        <input v-model="updatednewPassword1" class="w-full p-2 mb-3 border text-black rounded-lg"
+          placeholder="yangi parol" />
         <input v-model="updatednewPassword2" class="w-full p-2 mb-3 border text-black rounded-lg"
           placeholder="yangi parolni takrorlang" />
         <p class="text-red-600 text-sm">{{ err }}</p>
@@ -150,7 +150,6 @@
             </div>
           </div>
         </div>
-        <!-- Tahrirlash va o'chirish tugmalari birinchi koddan -->
         <div class="relative">
           <button @click="toggleModal(item.id)" class="text-gray-500 z-30  hover:text-gray-700 text-2xl p-2">⋮</button>
           <div v-if="modalOpen === item.id"
@@ -165,7 +164,7 @@
             </button>
             <button @click="openPassModal(item)"
               class="block w-full  px-4 py-2 text-left text-lime-600 hover:bg-red-100">
-             🔑 Parolni oʼzgartirish
+              🔑 Parolni oʼzgartirish
             </button>
           </div>
         </div>
@@ -356,14 +355,13 @@ const updatepassword = async () => {
     const token = localStorage.getItem("token");
 
     await axios.put(
-        `${URL}/admin/${selectedId.value}/password`,
-        {
-          oldPassword: updatedPassword.value, 
-          newPassword: updatednewPassword2.value, 
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }, 
-        }
+      `${URL}/admin/${selectedId.value}`,
+      {
+        password: updatednewPassword2.value,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
 
     getData();

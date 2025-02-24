@@ -157,7 +157,7 @@ const getData = async () => {
 
     const result = await response.json();
     const filteredData = result
-      .filter(item => item.active)
+      .filter(item => item.status=='active')
       .sort((a, b) => a.id - b.id);
 
     datakril.value = filteredData.map(item => ({
@@ -191,7 +191,7 @@ const getImageUrl = (filename) => `${imageBaseUrl}/${filename}`;
 const goToPath = (id) => {
   router.push(`/AdminPath/${id}`);
 };
-// upload
+
 const courtName = ref("");
 const file = ref(null);
 const successMessage = ref("");
@@ -217,7 +217,7 @@ const uploadCourt = async () => {
       },
     });
     if (response.status === 201) {
-      data.value.push(response.data); // Yangi elementni qo'shish
+      data.value.push(response.data); 
       successMessage.value = "Court muvaffaqiyatli yuklandi!";
       errorMessage.value = "";
       courtName.value = "";
@@ -241,7 +241,6 @@ const updateCourt = async () => {
     });
     if (response.status === 200) {
       const updatedCourt = response.data;
-      // `data` massivida elementni yangilash
       const index = data.value.findIndex((item) => item.id === PutId.value);
       if (index !== -1) {
         data.value[index] = updatedCourt;
@@ -256,11 +255,10 @@ const updateCourt = async () => {
   }
 };
 watch([showModal, PutModal, asd], ([modalOpen, asdOpen, deleteModalOpen]) => {
-  // Agar modal ochilsa, skrollni bloklaymiz
+
   if (modalOpen || deleteModalOpen || asdOpen) {
     document.body.style.overflow = 'hidden';
   } else {
-    // Modal yopilsa, skrollni tiklaymiz
     document.body.style.overflow = '';
   }
 });

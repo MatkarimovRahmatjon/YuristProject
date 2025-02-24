@@ -147,7 +147,7 @@ const Modal = () => {
 
 const func = (id) => {
   PutId.value = id;
-  selectedItemId.value = id; // Fix the variable name here
+  selectedItemId.value = id;
   asd.value = !asd.value;
 };
 

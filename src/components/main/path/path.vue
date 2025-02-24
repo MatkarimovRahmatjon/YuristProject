@@ -68,7 +68,7 @@ const getData = async () => {
           .sort((a, b) => a.id - b.id)
           .map(item => ({
             ...item,
-            translatedName: translateText(item.name) // Kirillchaga o‘girib qo‘shish
+            translatedName: translateText(item.name)
           }));
       data.value = result;
     } else {

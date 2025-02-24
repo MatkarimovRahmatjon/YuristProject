@@ -109,10 +109,7 @@ const getData = async () => {
     const response = await axios.get(`${URL}/admin`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-
     admins.value = response.data.filter(item => item.type === "active");
-
-    // Convert names and lavozimi based on the `dat` value
     if (dat.value === 'datakril') {
       admins.value = admins.value.map(admin => {
         admin.name = latinToCyrillic(admin.name);
@@ -128,8 +125,87 @@ const getData = async () => {
         return admin;
       });
     }
-
-    // Force reactivity update by using nextTick after data modification
+    await nextTick();
+  } catch (error) {
+    console.error("Xatolik:", error);
+  }
+};
+const getyuristData = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${URL}/yurists`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    admins.value = response.data.filter(item => item.type === "active");
+    if (dat.value === 'datakril') {
+      admins.value = admins.value.map(admin => {
+        admin.name = latinToCyrillic(admin.name);
+        admin.surname = latinToCyrillic(admin.surname);
+        admin.lavozimi = latinToCyrillic(admin.lavozimi); // Convert lavozimi to Cyrillic
+        return admin;
+      });
+    } else if (dat.value === 'datalotin') {
+      admins.value = admins.value.map(admin => {
+        admin.name = cyrillicToLatin(admin.name);
+        admin.surname = cyrillicToLatin(admin.surname);
+        admin.lavozimi = cyrillicToLatin(admin.lavozimi); // Convert lavozimi to Latin
+        return admin;
+      });
+    }
+    await nextTick();
+  } catch (error) {
+    console.error("Xatolik:", error);
+  }
+};
+const getbigAdminData = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${URL}/bigAdmin`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    admins.value = response.data.filter(item => item.type === "active");
+    if (dat.value === 'datakril') {
+      admins.value = admins.value.map(admin => {
+        admin.name = latinToCyrillic(admin.name);
+        admin.surname = latinToCyrillic(admin.surname);
+        admin.lavozimi = latinToCyrillic(admin.lavozimi); // Convert lavozimi to Cyrillic
+        return admin;
+      });
+    } else if (dat.value === 'datalotin') {
+      admins.value = admins.value.map(admin => {
+        admin.name = cyrillicToLatin(admin.name);
+        admin.surname = cyrillicToLatin(admin.surname);
+        admin.lavozimi = cyrillicToLatin(admin.lavozimi); // Convert lavozimi to Latin
+        return admin;
+      });
+    }
+    await nextTick();
+  } catch (error) {
+    console.error("Xatolik:", error);
+  }
+};
+const getasdData = async () => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(`${URL}/admin`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    admins.value = response.data.filter(item => item.type === "active");
+    if (dat.value === 'datakril') {
+      admins.value = admins.value.map(admin => {
+        admin.name = latinToCyrillic(admin.name);
+        admin.surname = latinToCyrillic(admin.surname);
+        admin.lavozimi = latinToCyrillic(admin.lavozimi); // Convert lavozimi to Cyrillic
+        return admin;
+      });
+    } else if (dat.value === 'datalotin') {
+      admins.value = admins.value.map(admin => {
+        admin.name = cyrillicToLatin(admin.name);
+        admin.surname = cyrillicToLatin(admin.surname);
+        admin.lavozimi = cyrillicToLatin(admin.lavozimi); // Convert lavozimi to Latin
+        return admin;
+      });
+    }
     await nextTick();
   } catch (error) {
     console.error("Xatolik:", error);

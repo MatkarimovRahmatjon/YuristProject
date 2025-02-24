@@ -174,7 +174,6 @@ const uploadCourt = async () => {
 const datakril = ref([]);
 const dat = inject('dat');
 
-// Transliteration map
 const translitMap = {
   "ch": "ч", "sh": "ш", "yo": "ё", "yu": "ю", "ya": "я", "ye": "е", "oʻ": "ў", "g‘": "ғ",
   "a": "а", "b": "б", "d": "д", "e": "э", "f": "ф", "g": "г", "h": "ҳ", "i": "и", "j": "ж",
@@ -182,7 +181,6 @@ const translitMap = {
   "t": "т", "u": "у", "v": "в", "x": "х", "y": "й", "z": "з", "'": "ъ"
 };
 
-// Translate function
 const translateText = (text) => {
   let translated = text.toLowerCase();
   for (const key in translitMap) {
@@ -192,20 +190,18 @@ const translateText = (text) => {
   return translated;
 };
 
-// Fetch data and translate names
 const getData = async () => {
   try {
     const response = await fetch(`${URL}/partners`);
     if (response.ok) {
       const result = await response.json();
-      // Kirillcha tarjima qilish
       datakril.value = result
         .sort((a, b) => a.id - b.id)
         .map(item => ({
           ...item,
-          translatedName: translateText(item.name) // Kirillchaga o'girib qo'shish
+          translatedName: translateText(item.name) 
         }));
-      data.value = result; // Asl ma'lumotlar saqlanadi
+      data.value = result; di
     } else {
       console.error("Ma'lumotlarni olishda xatolik:", response.statusText);
     }
@@ -255,8 +251,6 @@ const updateCourt = async () => {
 
     if (response.status === 200) {
       const updatedCourt = response.data;
-
-      // `data` massivida elementni yangilash
       const index = data.value.findIndex((item) => item.id === PutId.value);
       if (index !== -1) {
         data.value[index] = updatedCourt;
