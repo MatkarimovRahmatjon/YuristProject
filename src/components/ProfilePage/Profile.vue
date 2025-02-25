@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios';
 import { io } from 'socket.io-client';
@@ -40,23 +40,18 @@ const getAdminStatus = (admin) => {
   if (!admin || !admin.id) {
     return { status: "Noma'lum", color: "text-gray-500", dotColor: "bg-gray-500" };
   }
-  
-  const adminId = admin.id.toString();
-  if (onlineAdmins.value.includes(adminId)) {
+  const currentAdminId = id.value.toString();
+  if (onlineAdmins.value.includes(currentAdminId)) {
     return { status: "Onlayn", color: "text-green-500", dotColor: "bg-green-500" };
   }
   if (admin.lastSeen) {
     const lastSeenDate = new Date(admin.lastSeen);
     const minutesDifference = differenceInMinutes(new Date(), lastSeenDate);
-    console.log(`Admin ${adminId} uchun farq:`, minutesDifference, "daqiqada");
     if (minutesDifference < 1) {
       return { status: "Onlayn", color: "text-green-500", dotColor: "bg-green-500" };
     } else {
       return {
-        status: `${formatDistanceToNow(lastSeenDate, {
-          addSuffix: true,
-          locale: uz,
-        })} tarmoqda edi`,
+        status: `${formatDistanceToNow(lastSeenDate, { addSuffix: true, locale: uz })} tarmoqda edi`,
         color: "text-red-500",
         dotColor: "bg-red-500",
       };
@@ -65,19 +60,25 @@ const getAdminStatus = (admin) => {
   return { status: "Oflayn", color: "text-red-500", dotColor: "bg-red-500" };
 };
 
+const adminStatus = computed(() => {
+  return userInfo.value ? getAdminStatus(userInfo.value) : { status: "Noma'lum", color: "text-gray-500", dotColor: "bg-gray-500" };
+});
+
 const checkOnlineStatus = (onlineAdminIds) => {
-  console.log("Kelgan online admin ID-lari:", onlineAdminIds);
-  onlineAdmins.value = onlineAdminIds.map((id) => id.toString());
-  console.log("Yangilangan onlineAdmins:", onlineAdmins.value);
+  onlineAdmins.value = onlineAdminIds.map((adminId) => adminId.toString());
 };
 
 onMounted(() => {
   fetchUserData();
+
+  socket.emit('joinAdmin', id.value);
+
   socket.on('adminOnlineUpdate', checkOnlineStatus);
 });
 
 onUnmounted(() => {
   socket.off('adminOnlineUpdate');
+  socket.disconnect();
 });
 </script>
 
@@ -103,11 +104,11 @@ onUnmounted(() => {
             <span class="font-medium">Fuqaroning lavozimi :</span>
             <span class="ml-2">{{ userInfo.lavozimi }}</span>
           </div>
-          <div class="flex items-center" v-if="userInfo">
-            <span :class="getAdminStatus(userInfo).color">
-              {{ getAdminStatus(userInfo).status }}
+          <div class="flex items-center">
+            <span :class="adminStatus.color">
+              {{ adminStatus.status }}
             </span>
-            <div class="w-5 h-5 ml-2 rounded-full" :class="getAdminStatus(userInfo).dotColor"></div>
+            <div class="w-5 h-5 ml-2 rounded-full" :class="adminStatus.dotColor"></div>
           </div>
         </div>
       </div>

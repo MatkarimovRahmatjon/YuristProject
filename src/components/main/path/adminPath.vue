@@ -3,8 +3,8 @@
   <div v-if="showModal"
        class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
     <div
-        class="absolute h-auto w-11/12 max-w-md bg-slate-800 flex flex-col opacity-90 items-center justify-center p-6 sm:p-10 rounded-lg">
-      <img @click="toggleModal" class="w-10 sm:w-14 absolute top-4 right-4 cursor-pointer"
+        class="absolute h-auto  bg-slate-500 flex flex-col opacity-90 items-center justify-center p-6 sm:p-10 rounded-lg">
+      <img @click="toggleModal" class="w-10 absolute top-4 right-4 cursor-pointer"
            src="../../../../public/reject.png" alt="Close" />
       <uploadpathadmin />
     </div>
@@ -13,8 +13,8 @@
   <!-- Update Modal -->
   <div v-if="PutModal" class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
     <div
-        class="absolute h-auto w-11/12 max-w-md bg-slate-800 flex flex-col opacity-90 items-center justify-center p-6 sm:p-10 rounded-lg">
-      <img @click="Modal" class="w-10 sm:w-14 absolute top-4 right-4 cursor-pointer" src="../../../../public/reject.png"
+        class="absolute h-auto bg-slate-800 flex flex-col opacity-90 items-center justify-center p-6 sm:p-10 rounded-lg">
+      <img @click="Modal" class="w-10 absolute top-4 right-4 cursor-pointer" src="../../../../public/reject.png"
            alt="Close" />
       <form @submit.prevent="updateCourt" class="w-full">
         <input v-model="courtName" class="w-full text-black outline-none p-3 mt-6 rounded-lg" type="text" id="name"
@@ -32,17 +32,17 @@
 
   <!-- Delete Confirmation Modal -->
   <div v-if="asd" class="fixed inset-0 z-50 w-full h-full flex items-center bg-black bg-opacity-50 justify-center">
-    <div class="absolute w-11/12 max-w-md bg-gray-300 flex flex-col items-center justify-center p-6 sm:p-10 rounded-lg">
-      <img @click="func(null)" class="w-10 sm:w-14 absolute top-4 right-4 cursor-pointer"
+    <div class="absolute w-[400px] bg-gray-300 flex flex-col items-center justify-center p-6 sm:p-10 rounded-lg">
+      <img @click="func(null)" class="w-10 absolute top-4 right-4 cursor-pointer"
            src="../../../../public/reject.png" alt="Close" />
-      <div class="mt-4 flex flex-col items-center">
+      <div class="mt-4 flex flex-col w-full items-center">
         <button @click="Modal"
-                class="w-full py-4 mb-4 text-lg font-medium text-black bg-lime-500 rounded-lg hover:bg-lime-600">
+                class="w-full py-4 px-6 mb-4 text-lg font-medium text-black bg-lime-500 rounded-lg hover:bg-lime-600">
           <img class="w-6 sm:w-8 inline-block mr-2" src="../../../../public/pen.png" alt="Edit" />
           O’zgartirish
         </button>
         <button @click="removeSelectedItems"
-                class="w-full py-4 text-lg font-medium text-white bg-red-500 rounded-lg hover:bg-red-700">
+                class="w-full py-4 text-lg px-6 font-medium text-white bg-red-500 rounded-lg hover:bg-red-700">
           <img class="w-6 sm:w-8 inline-block mr-2" src="../../../../public/remove.png" alt="Delete" />
           O'chirish
         </button>

@@ -1,25 +1,26 @@
 <template>
-  <div v-if="qwe" class="fixed z-10 inset-0 flex items-center justify-center bg-black bg-opacity-50">
+  <!-- <div v-if="qwe" class="fixed z-50 inset-0 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-blue-600 p-6 rounded-lg w-11/12 max-w-md">
       <div v-for="item in admins" :key="item.id" class="flex items-center border-b-2 mb-2 justify-between">
         <h1 class="text-[20px]">{{ item.name }} {{ item.surname }}</h1>
-        <input type="radio" name="admin" :value="item.id" @change="() => handleCheckbox(item.id)"
+        <input type="radio" name="admin" :value="item.id" @change="handleCheckbox(item.id)"
           :checked="selectedAdminId === item.id" class="rounded-md" />
       </div>
+      <button @click="qwe = false" class="mt-4 px-4 py-2 bg-white mr-2 text-black rounded">Bekor qilish</button>
       <button @click="addUserToAllowed" class="mt-4 px-4 py-2 bg-white text-black rounded">Yuborish</button>
     </div>
   </div>
 
-  <div class="mt-36 flex justify-end">
+  <div class=" flex justify-end">
     <button class="border text-black m-2 py-2 px-5 rounded-lg bg-[#09FF52]" @click="qwe = true">Admin qo'shish</button>
-  </div>
+  </div> -->
 
   <div>
     <ul>
       <li v-for="admin in admins" :key="admin.id" class="flex items-center justify-between my-2 bg-[#223B9E] p-4 rounded-md">
         <div class="flex gap-4">
           <h1>{{ admin.name }} {{ admin.surname }}</h1>
-          <h1>Lavozimi: {{ admin.role }}</h1>
+          <h1>Lavozimi: {{ admin.lavozimi }}</h1>
         </div>
         <div class="flex gap-2">
           <h1>On</h1>
@@ -35,31 +36,45 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watchEffect } from "vue";
 import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
-import { URL } from "@/auth/url.js";
 import axios from "axios";
+import { URL } from "@/auth/url.js";
 
 const route = useRoute();
 const id = ref(null);
 const admins = ref([]);
 const allowedUsers = ref([]);
 const qwe = ref(false);
+const selectedAdminId = ref(null);
 
-const getAdmins = async () => {
+const getAdminsAndOthers = async () => {
   try {
     const token = localStorage.getItem("token");
-    const response = await axios.get(`${URL}/admin`, {
+    const config = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
-    admins.value = response.data;
+    };
+    const [adminsRes, yuristRes, managerRes] = await Promise.all([
+      axios.get(`${URL}/admin`, config),
+      axios.get(`${URL}/yurist`, config),
+      axios.get(`${URL}/manager`, config),
+    ]);
+    const combinedData = [
+      ...adminsRes.data,
+      ...yuristRes.data,
+      ...managerRes.data,
+    ];
+    admins.value = combinedData;
     updateAdminStatuses();
   } catch (error) {
-    console.error("Xatolik (getAdmins):", error);
+    console.error("Xatolik (getAdminsAndOthers):", error);
   }
 };
+
+getAdminsAndOthers();
+
 
 const getAllowedUsers = async (courtId) => {
   try {
@@ -77,10 +92,15 @@ const updateAdminStatuses = () => {
   });
 };
 
-const addUserToAllowed = async (admin) => {
+const addUserToAllowed = async () => {
+  if (!selectedAdminId.value) {
+    console.error("Admin tanlanmagan!");
+    return;
+  }
   try {
-    await axios.post(`${URL}/allowed-users/${id.value}/${admin.id}`);
+    await axios.post(`${URL}/allowed-users/${id.value}/${selectedAdminId.value}`);
     getAllowedUsers(id.value);
+    qwe.value = false;
   } catch (error) {
     console.error("Xatolik (addUserToAllowed):", error);
   }
@@ -100,16 +120,29 @@ const toggleAdminAccess = async (admin) => {
     if (admin.isAllowed) {
       await removeUserFromAllowed(admin);
     } else {
-      await addUserToAllowed(admin);
+      selectedAdminId.value = admin.id;
+      await addUserToAllowed();
     }
   } catch (error) {
     console.error("Xatolik (toggleAdminAccess):", error);
   }
 };
 
+const handleCheckbox = (adminId) => {
+  selectedAdminId.value = adminId;
+};
+
 onMounted(() => {
   id.value = route.params.id;
   if (id.value) {
+    getAdmins();
+    getAllowedUsers(id.value);
+  }
+});
+
+watchEffect(() => {
+  if (route.params.id) {
+    id.value = route.params.id;
     getAdmins();
     getAllowedUsers(id.value);
   }
@@ -154,11 +187,11 @@ onMounted(() => {
   border-radius: 50%;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: #09FF52;
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   transform: translateX(24px);
 }
 </style>

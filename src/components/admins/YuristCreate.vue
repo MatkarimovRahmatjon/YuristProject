@@ -129,9 +129,9 @@
             <h1 class="text-2xl font-semibold text-gray-700">FIO: {{ item.surname }} {{ item.name }} {{ item.dadname }}
             </h1>
             <h1 class="text-lg text-gray-500">Login: {{ item.username }}</h1>
-            <div class="mb-4 relative  w-fit break-words">
-              <span class="font-medium">Fuqaroning lavozimi :</span>
-              <span class="block group truncate text-black max-w-[450px] ml-2 cursor-pointer">
+            <div class="mb-4 relative text-gray-700 flex w-fit break-words">
+              <span class="font-medium text-gray-700">Fuqaroning lavozimi :</span>
+              <span class="block group truncate text-gray-700 max-w-[450px] ml-2 cursor-pointer">
                 {{ item.lavozimi }}
                 <span
                   class="absolute left-0 top-full mt-1 w-auto max-w-[550px] bg-gray-800 text-white text-sm px-2 py-1 rounded hidden group-hover:block">
@@ -180,8 +180,8 @@ import axios from "axios";
 import { formatDistanceToNow } from "date-fns";
 import { uz } from "date-fns/locale";
 import { URL } from "@/auth/url.js";
-import router from "@/router/index.js";
 import { io } from "socket.io-client";
+import { useRouter } from "vue-router";
 
 const socket = io(URL);
 const data = ref([]);
@@ -221,9 +221,11 @@ const updatednewPassword1 = ref("")
 const updatednewPassword2 = ref("")
 const Count = ref(null);
 const asds = ref(false)
+const router = useRouter()
 const path = (id) => {
   router.push(`/profile/${id}`);
 };
+
 
 const toggleModal = (id) => {
   modalOpen.value = modalOpen.value === id ? null : id;

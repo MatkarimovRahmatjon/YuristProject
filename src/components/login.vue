@@ -22,6 +22,36 @@
         <button @click="setData" class="bg-lime-600 shadow-2xl hover:bg-lime-700 duration-500 px-14 rounded-[25px] mt-12 py-3">Tizimga Kirish</button>
         <p v-if="error" class="text-red-500 mt-4">{{ error }}</p>
       </div>
+      <div class="bg-red-700 flex justify-center items-start gap-10 rounded-[20px] p-10">
+        <div class="">
+          <img class="w-96 rounded-[20px]" src="../../public/unnamed.webp" alt="">
+        </div>
+        <div>
+          <h1 class="text-center text-[25px] font-bold bg-yellow-600 w-[330px] rounded-2xl ">DIQQAT&nbsp! &nbsp
+            ESLATMA&nbsp! </h1> <br>
+          <p class="">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspOʼzbekiston
+            Respublikasida internet saytlarini buzib kirish bilan bogʼliq jinoyatlar uchun
+            javobgarlik Oʼzbekiston Respublikasining Qonuniy hujjatlarida aniq belgilangan. Bu kabi harakatlar jinoiy
+            javobgarlikni keltirib chiqaradi va bu masala Oʼzbekiston Respublikasining Jinoyat kodeksida bayon
+            etilgan.<br>
+            Oʼzbekiston Respublikasi Jinoyat kodeksi:
+            278-moddasida "Kompьyuter maʼlumotlari va vositalarini oʼgʼirlash, yoʼq qilish, oʼzgartirish yoki bloklash".
+            Bu
+            moddaga koʼra, agar shaxs kompьyuter maʼlumotlarini oʼzgartirish, yoʼq qilish yoki bloklash orqali buzib
+            kirsa, u jinoiy javobgarlikka tortiladi. Buning uchun belgilangan jazo turlari qamoq, jarima yoki boshqa
+            turdagi jazolarni oʼz ichiga oladi. Bundan tashqari
+            278^1-moddasiga koʼra "Kompьyuter maʼlumotlariga noqonuniy kirish". Аgar shaxs kompьyuter tizimiga ruxsatsiz
+            kirsa, u
+            holda u mazkur moddaga koʼra javobgarlikka tortiladi. <br>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspOʼzbekiston Respublikasi Maʼmuriy
+            javobgarlik toʼgʼrisidagi kodeks: <br>
+            Maʼmuriy huquqbuzarliklar toʼgʼrisidagi kodeksda ham internet tarmoqlarini buzib kirish kabi mayda
+            huquqbuzarliklar uchun javobgarlik belgilangan <br>
+            Ushbu qonunchilik asosida, internet saytlarini buzib kirish kabi harakatlar jinoyat hisoblanadi va jinoiy
+            javobgarlikni keltirib chiqaradi. Jinoyat sodir etgan shaxslar qonun oldida javob beradi.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </template>

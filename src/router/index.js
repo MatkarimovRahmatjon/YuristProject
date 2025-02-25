@@ -45,6 +45,7 @@ const routes = [
             { path: "/requireUserobligationsFiles", component: () => import("@/components/RequireFile/obligations/requireUserObligationsFiles.vue") },
             { path: "/payments", component: () => import("@/components/payments.vue") },
             { path: "/obligations/:id", component: () => import("@/components/RequireFile/obligations/obligations.vue") },
+            { path: "/smile", component: () => import("@/components/Message/CreateSmile.vue") },
         ],
     },
 ];

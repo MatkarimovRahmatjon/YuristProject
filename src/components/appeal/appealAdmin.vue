@@ -197,13 +197,18 @@ const getData = async () => {
     const response = await fetch(`${URL}/appeal`);
     if (response.ok) {
       const result = await response.json();
+      console.log(result);
       datakril.value = result
+      .filter(item => item.statu=='active')
         .sort((a, b) => a.id - b.id)
         .map(item => ({
           ...item,
           translatedName: translateText(item.name) 
         }));
-      data.value = result;
+        data.value = result
+        .filter(item => item.statu=='active')
+        .sort((a, b) => a.id - b.id)
+        ;
     } else {
       console.error("Ma'lumotlarni olishda xatolik:", response.statusText);
     }

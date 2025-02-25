@@ -32,8 +32,10 @@
     "jonatish": "Jo‘natish",
     "rad_etish": "Nima uchun hujjatni rad etish kerak, hujjatni qayta ko‘rib chiqish uchun qisqacha sabab.",
     "korib_chiqish": "Nima uchun hujjatni qayta ko‘rib chiqish kerak, hujjatni qayta ko‘rib chiqish uchun qisqacha sabab.",
-    "sabab":"Sababni kiriting",
-    "enable_delete":"Filelarni o‘chirish",
-    "cancel_delete":"O‘chirishni bekor qilish"
-
+    "sabab": "Sababni kiriting",
+    "enable_delete": "Filelarni o‘chirish",
+    "cancel_delete": "O‘chirishni bekor qilish",
+    "holat":"holati",
+    "sababni":"Sababni ko'rish",
+    "Imzolash_uchun_yuborish":"Imzolash uchun yuborish"
 }

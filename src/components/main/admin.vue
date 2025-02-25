@@ -44,6 +44,7 @@
 
           <button @click="push"
             class="py-4 rounded-[15px] h-[70px] items-center text-black flex w-full min-w-[250px] duration-500 text-[20px] px-10 bg-gray-400 hover:red-700">
+            <img class="w-10 mr-5" src="../../../public/settings3.png" alt="">
             setting
           </button>
         </div>

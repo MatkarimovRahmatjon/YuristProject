@@ -31,6 +31,7 @@ const menuItems = [
   { to: "/archive", label: "Arxivlar ro'yxati", condition: true },
   { to: "/Requirefiles", label: "Filelar", condition: () => data.value?.userFiles },
   { to: "/payments", label: "Tizim to'lovlari", condition: true },
+  { to: "/smile", label: "stikker qo'shish", condition: true },
 ];
 
 const filteredMenu = computed(() => {
@@ -42,15 +43,12 @@ const filteredMenu = computed(() => {
 
 <template>
   <aside class="aside-nav bg-blue-800">
-    <nav>
-      <ul>
-        <li v-for="(item, index) in filteredMenu" :key="index" class="my-1">
-          <router-link :to="item.to">
-            <b class="text-black mr-5">{{ index + 1 }}</b> {{ item.label }}
-          </router-link>
-        </li>
-      </ul>
-    </nav>
+    <router-link :to="item.to" v-for="(item, index) in filteredMenu" :key="index" class="mb-1 li">
+      <b class="text-black block w-[30px]">{{ index + 1 }}</b>
+      <h1 class="text-black">
+        {{ item.label }}
+      </h1>
+    </router-link>
   </aside>
 </template>
 
@@ -63,28 +61,15 @@ const filteredMenu = computed(() => {
   top: 200px;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-li {
+.li {
   padding: 15px 20px;
   background-color: #f0d73a;
   transition: background-color 0.3s ease-in-out;
+  display: flex;
 }
 
-::v-deep(a) {
-  color: black !important;
-  text-decoration: none;
-  font-size: 1.1rem;
-  display: block;
-}
-
-li:hover {
+.li:hover {
   background-color: rgba(229, 231, 235, 0.1);
   cursor: pointer;
-  color: white;
 }
 </style>
