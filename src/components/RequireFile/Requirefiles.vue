@@ -5,8 +5,10 @@
       {{ $t('create') }}
     </button>
     <div class="max-w-[95%] mx-auto p-6 bg-white rounded-xl shadow-lg mt-10">
-      <input v-model="searchQuery" type="text" placeholder="Qidirish..."
-        class="mb-4 w-full border-2 p-2 rounded-lg text-black " />
+      <div class="flex justify-end">
+        <input v-model="searchQuery" type="text" :placeholder="$t('qidiruv')"
+        class="mb-4 border-2 p-2 rounded-lg text-black " />
+      </div>
       <button v-if="data === 'yurist'" @click="toggleDeleteMode"
         class="bg-blue-500 text-white mb-4 mr-2 px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition">
         {{ deleteMode ? $t('cancel_delete') : $t('enable_delete') }}
