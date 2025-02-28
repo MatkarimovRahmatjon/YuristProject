@@ -93,12 +93,12 @@ const uploadFiles = async () => {
       <body>
         <h2>Shartnoma</h2>
         <p>
-          Men, <strong>${formData.value.lastName || 'Matkarimov'} ${formData.value.firstName || 'Rahmatjon'} 
-          ${formData.value.middleName || "Umirbek o'g'li"}</strong>,<br>
-          pasport raqami: <strong>${formData.value.idNumber || 'AB1234567'}</strong>,<br>
-          tug'ilgan sana: <strong>${formData.value.birthday || '12.01.1999'}</strong>,<br>
-          jshshr raqami: <strong>${formData.value.jshshr || '123456789110112'}</strong>,<br>
-          telefon raqami: +<strong>${formData.value.phoneNumber || '998919999999'}</strong>,<br>
+          Men, <strong>${formData.value.lastName} ${formData.value.firstName} 
+          ${formData.value.middleName}</strong>,<br>
+          pasport raqami: <strong>${formData.value.idNumber}</strong>,<br>
+          tug'ilgan sana: <strong>${formData.value.birthday}</strong>,<br>
+          jshshr raqami: <strong>${formData.value.jshshr}</strong>,<br>
+          telefon raqami: +<strong>${formData.value.phoneNumber}</strong>,<br>
           ushbu shartnoma shartlariga rozilik bildiraman.
         </p>
       </body>
